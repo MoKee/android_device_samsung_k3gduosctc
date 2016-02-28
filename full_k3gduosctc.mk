@@ -1,4 +1,7 @@
+#
 # Copyright (C) 2014 The CyanogenMod Project
+#
+# Copyright (C) 2016 The Mokee OpenSource Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +18,12 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from kltespr device
-$(call inherit-product, device/samsung/kltespr/device.mk)
+# Inherit from k3gduosctc device
+$(call inherit-product, device/samsung/k3gduosctc/device.mk)
 
 # Set those variables here to overwrite the inherited values.
-PRODUCT_NAME := full_kltespr
-PRODUCT_DEVICE := kltespr
+PRODUCT_NAME := full_k3gduosctc
+PRODUCT_DEVICE := k3gduosctc
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
-PRODUCT_MODEL := kltespr
+PRODUCT_MODEL := SM-G9009D

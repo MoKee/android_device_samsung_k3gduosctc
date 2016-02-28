@@ -1,5 +1,7 @@
-#
+# 
 # Copyright (C) 2014 The CyanogenMod Project
+#
+# Copyright (C) 2016 The Mokee OpenSource Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +18,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),kltespr)
+ifeq ($(TARGET_DEVICE),k3gduosctc)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif

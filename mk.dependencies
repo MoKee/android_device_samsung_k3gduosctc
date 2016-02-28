@@ -1,7 +1,7 @@
 [
   {
-    "repository": "android_vendor_samsung_kltespr",
-    "target_path": "vendor/samsung/kltespr"
+    "repository": "android_vendor_samsung_k3gduosctc",
+    "target_path": "vendor/samsung/k3gduosctc"
   },
   {
     "repository": "android_device_samsung_klte-common",

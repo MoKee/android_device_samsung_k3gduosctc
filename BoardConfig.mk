@@ -1,4 +1,7 @@
+#
 # Copyright (C) 2014 The CyanogenMod Project
+#
+# Copyright (C) 2016 The Mokee OpenSource Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,15 +18,18 @@
 # inherit from common klte
 -include device/samsung/klte-common/BoardConfigCommon.mk
 
-TARGET_OTA_ASSERT_DEVICE := kltespr,klte
+TARGET_OTA_ASSERT_DEVICE := k3gduos,k3gduosctc,k3g,k3gctc,klte
 
 # Kernel
-TARGET_KERNEL_VARIANT_CONFIG := msm8974pro_sec_klte_spr_defconfig
+TARGET_KERNEL_VARIANT_CONFIG := msm8974pro_sec_k3gduos_ctc_defconfig
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_LIBINIT_DEFINES_FILE := device/samsung/kltespr/init/init_klte.cpp
+TARGET_LIBINIT_DEFINES_FILE := device/samsung/k3gduosctc/init/init_klte.cpp
 TARGET_UNIFIED_DEVICE := true
+
+# NFC
+BOARD_NFC_CHIPSET := pn547
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 13631488
@@ -32,4 +38,4 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2831155200
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 12187581440
 
 # inherit from the proprietary version
--include vendor/samsung/kltespr/BoardConfigVendor.mk
+-include vendor/samsung/k3gduosctc/BoardConfigVendor.mk

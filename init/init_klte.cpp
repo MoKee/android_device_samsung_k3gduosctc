@@ -1,6 +1,8 @@
 /*
    Copyright (c) 2013, The Linux Foundation. All rights reserved.
 
+   Copyright (c) 2016, The Mokee OpenSource Project. 
+
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
    met:
@@ -39,13 +41,12 @@
 void cdma_properties(char const *default_cdma_sub,
         char const *operator_numeric, char const *operator_alpha)
 {
-    property_set("ril.subscription.types", "NV,RUIM");
+    property_set("ril.subscription.types", "RUIM");
     property_set("ro.cdma.home.operator.numeric", operator_numeric);
     property_set("ro.cdma.home.operator.alpha", operator_alpha);
     property_set("ro.telephony.default_cdma_sub", default_cdma_sub);
-    property_set("ro.telephony.default_network", "10");
+    property_set("ro.telephony.default_network", "5");
     property_set("ro.telephony.ril.config", "newDriverCallU,newDialCode");
-    property_set("telephony.lteOnCdmaDevice", "1");
 }
 
 void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *board_type)
@@ -66,16 +67,14 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
 
     property_get("ro.bootloader", bootloader);
 
-    if (strstr(bootloader, "G900P")) {
-        /* kltespr */
-        property_set("ro.build.fingerprint", "samsung/kltespr/kltespr:4.4.2/KOT49H/G900PVPU1ANCB:user/release-keys");
-        property_set("ro.build.description", "kltespr-user 4.4.2 KOT49H G900PVPU1ANCB release-keys");
-        property_set("ro.product.model", "SM-G900P");
-        property_set("ro.product.device", "kltespr");
-        property_set("telephony.sms.pseudo_multipart", "1");
-        cdma_properties("1", "310120", "Sprint");
+    if (strstr(bootloader, "G9009D")) {
+        /* k3gduosctc */
+        property_set("ro.build.fingerprint", "samsung/k3gduosctc/klte:4.4.2/KOT49H/G9009DKEU1ANE9:user/release-keys");
+        property_set("ro.build.description", "k3gduosctc-user 4.4.2 KOT49H G9009DKEU1ANE9 release-keys");
+        property_set("ro.product.model", "SM-G9009D");
+        property_set("ro.product.device", "k3gduosctc");
+        cdma_properties("0", "46003", "中国电信");
     }
-    /* TODO: Add Sprint MVNOs */
 
     property_get("ro.product.device", device);
     strlcpy(devicename, device, sizeof(devicename));
