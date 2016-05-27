@@ -16,8 +16,6 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
-
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
 
