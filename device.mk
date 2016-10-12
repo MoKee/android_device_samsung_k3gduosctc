@@ -29,6 +29,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # RIL
 PRODUCT_PACKAGES += \
+    cpboot-daemon \
     init.target.rc
 
 # NFC
