@@ -25,6 +25,7 @@ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_SAMSUNG_DUAL_SIM := true
 
 # Kernel
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 zcache.enabled=1 zcache.compressor=lz4 androidboot.selinux=permissive
 TARGET_KERNEL_VARIANT_CONFIG := msm8974pro_sec_k3gduos_ctc_defconfig
 
 # Init
