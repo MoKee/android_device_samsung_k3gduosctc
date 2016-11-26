@@ -72,8 +72,6 @@ void init_target_properties()
         property_set("ro.build.description", "k3gduosctc-user 4.4.2 KOT49H G9009DKEU1ANE9 release-keys");
         property_set("ro.product.model", "SM-G9009D");
         property_set("ro.product.device", "k3gduosctc");
-        property_set("gsm.current.vsid", "0");
-        property_set("gsm.current.vsid2", "1");
         cdma_properties("0", "46003", "中国电信");
     }
 
