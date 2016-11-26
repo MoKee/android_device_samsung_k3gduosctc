@@ -29,6 +29,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # NFC
 PRODUCT_PACKAGES += \
+    libpn547_fw \
     nfc_nci.pn54x.default
 
 PRODUCT_COPY_FILES += \
