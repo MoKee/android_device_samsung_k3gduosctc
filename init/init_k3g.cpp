@@ -1,7 +1,7 @@
 /*
    Copyright (c) 2013, The Linux Foundation. All rights reserved.
 
-   Copyright (c) 2016, The Mokee OpenSource Project. 
+   Copyright (c) 2016-2018, The Mokee OpenSource Project. 
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -32,41 +32,51 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "vendor_init.h"
+#include <android-base/logging.h>
+#include <android-base/properties.h>
+
 #include "property_service.h"
-#include "log.h"
-#include "util.h"
+#include "vendor_init.h"
 
 #include "init_msm8974.h"
 
-void cdma_properties(char const *default_cdma_sub,
-        char const *operator_numeric, char const *operator_alpha)
+using android::base::GetProperty;
+using android::init::property_set;
+
+void cdma_properties(char const default_cdma_sub[], char const operator_numeric[],
+        char const operator_alpha[],
+        char const default_network[])
 {
-    property_set("ril.subscription.types", "RUIM");
+    set_rild_libpath(rild_lib_variant);
+
+    property_set("ril.subscription.types", "NV,RUIM");
+    property_set("rild.lib2_type", "cdma");
     property_set("ro.cdma.home.operator.numeric", operator_numeric);
     property_set("ro.cdma.home.operator.alpha", operator_alpha);
     property_set("ro.telephony.default_cdma_sub", default_cdma_sub);
-    property_set("ro.telephony.default_network", "5");
-    property_set("ro.telephony.ril.config", "newDriverCallU,newDialCode");
+    property_set("ro.telephony.default_network", default_network);
+    property_set("telephony.lteOnCdmaDevice", "0");
 }
-
 void init_target_properties()
 {
-    std::string platform = property_get("ro.board.platform");
+    std::string platform = GetProperty("ro.board.platform", "");
     if (platform != ANDROID_TARGET)
         return;
 
-    std::string bootloader = property_get("ro.bootloader");
+    std::string bootloader = GetProperty("ro.bootloader", "");
 
     if (bootloader.find("G9009D") == 0) {
         /* k3gduosctc */
-        property_set("ro.build.fingerprint", "samsung/k3gduosctc/klte:4.4.2/KOT49H/G9009DKEU1ANE9:user/release-keys");
-        property_set("ro.build.description", "k3gduosctc-user 4.4.2 KOT49H G9009DKEU1ANE9 release-keys");
-        property_set("ro.product.model", "SM-G9009D");
-        property_set("ro.product.device", "k3gduosctc");
-        cdma_properties("0", "46003", "中国电信");
+        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "samsung/k3gduosctc/k3g:6.0.1/MMB29M/G9009DKEU1CQB1:user/release-keys");
+        property_override("ro.build.description", "k3gduosctc-user 6.0.1 MMB29M G9009DKEU1CQB1 release-keys");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "SM-G9009D");
+        property_override_dual("ro.product.device", "ro.vendor.product.device", "k3gduosctc");
+        property_set("gsm.current.vsid", "0");
+        property_set("gsm.current.vsid2", "1");
+        cdma_properties("0", "46003", "中国电信", "4");
     }
 
-    std::string device = property_get("ro.product.device");
-    INFO("Found bootloader id %s setting build properties for %s device\n", bootloader.c_str(), device.c_str());
+    std::string device = GetProperty("ro.product.device", "");
+    LOG(ERROR) << "Found bootloader id " << bootloader <<  " setting build properties for "
+        << device <<  " device" << std::endl;
 }

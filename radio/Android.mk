@@ -1,6 +1,5 @@
-#!/bin/bash
 #
-# Copyright (C) 2016-2018 The Mokee OpenSource Project
+# Copyright (C) 2018 The Mokee OpenSource Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +14,12 @@
 # limitations under the License.
 #
 
-set -e
+LOCAL_PATH:= $(call my-dir)
 
-export DEVICE=k3gduosctc
-export DEVICE_COMMON=klte-common
-export VENDOR=samsung
-
-./../$DEVICE_COMMON/setup-makefiles.sh $@
+include $(CLEAR_VARS)
+LOCAL_MODULE               := rild_dsds.rc
+LOCAL_MODULE_CLASS         := ETC
+LOCAL_SRC_FILES            := rild_dsds.rc
+LOCAL_MODULE_RELATIVE_PATH := init
+LOCAL_VENDOR_MODULE        := true
+include $(BUILD_PREBUILT)

@@ -1,7 +1,6 @@
 #
-# Copyright (C) 2014 The CyanogenMod Project
 #
-# Copyright (C) 2016 The Mokee OpenSource Project
+# Copyright (C) 2016-2018 The Mokee OpenSource Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,18 +23,18 @@ $(call inherit-product-if-exists, vendor/samsung/k3gduosctc/k3gduosctc-vendor.mk
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-# NFC
-# See https://github.com/CyanogenMod/android_external_libnfc-nci/blob/cm-14.1/halimpl/pn54x/Android.mk#L21
-# for magic values of NXP_CHIP_TYPE.
-NXP_CHIP_TYPE := 1
-PRODUCT_PACKAGES += \
-    libpn547_fw \
-    nfc_nci.pn54x.default
+# Fingerprint
+$(call inherit-product, device/samsung/klte-common/fingerprint/product.mk)
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/configs/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-    $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml
+# NFC
+$(call inherit-product, device/samsung/klte-common/nfc/pn547/product.mk)
+
+# Radio
+$(call inherit-product, device/samsung/klte-common/radio/dual/product.mk)
+
+# MK Maintainer
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.mk.maintainer=luo2888
 
 # common klte
 $(call inherit-product, device/samsung/klte-common/klte.mk)
